@@ -1,0 +1,33 @@
+button,
+.button {
+  background: $primary-button-bg;
+  color: white;
+  padding: 12px;
+  font-size: $font-size-title;
+  font-weight: $font-weight-semi;
+  border: none;
+  border-radius: 4px;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  &:hover {
+    background: linear-gradient(
+      90deg,
+      rgba(160, 234, 255, 1) 0%,
+      rgba(157, 155, 240, 1) 40%,
+      rgba(0, 212, 255, 1) 70%
+    );
+  }
+}
+
+textarea {
+  resize: none;
+  height: 100px;
+}
+
+.logout {
+  width: 70px;
+  position: absolute;
+  top: 25px;
+  right: 30px;
+}
