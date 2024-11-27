@@ -20,7 +20,7 @@ export default function MyCourse() {
   useEffect(() => {
     axios
       .get(
-        `https://collegemanagement-x1m6.onrender.com/college/viewsubject/${facultyId}`
+        `https://backend-college-wvd6.onrender.com/college/viewsubject/${facultyId}`
       )
       .then((res) => {
         const details = res.data.data[0];
@@ -40,7 +40,7 @@ export default function MyCourse() {
 
     axios
       .get(
-        `https://collegemanagement-x1m6.onrender.com/college/viewsubject/${facultyId}`
+        `https://backend-college-wvd6.onrender.com/college/viewsubject/${facultyId}`
       )
       .then((res) => {
         const details = res.data.data[0];
@@ -58,7 +58,7 @@ export default function MyCourse() {
     setAddFlag(true);
     axios
       .get(
-        `https://collegemanagement-x1m6.onrender.com/college/unenrolledstudent/${facultyId}`
+        `https://backend-college-wvd6.onrender.com/college/unenrolledstudent/${facultyId}`
       )
       .then((res) => {
         const details = res.data.data;
@@ -72,7 +72,7 @@ export default function MyCourse() {
 
     axios
       .post(
-        `https://collegemanagement-x1m6.onrender.com/college/enrollbyfaculty`,
+        `https://backend-college-wvd6.onrender.com/college/enrollbyfaculty`,
         {
           studentId: id,
           facultyId: facultyId,

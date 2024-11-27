@@ -12,7 +12,7 @@ const AvailableCourse = () => {
     //fetch available course for student
     axios
       .get(
-        `https://collegemanagement-x1m6.onrender.com/college/availablecourse/${localStorage.getItem(
+        `https://backend-college-wvd6.onrender.com/college/availablecourse/${localStorage.getItem(
           "student"
         )}`
       )
@@ -27,7 +27,7 @@ const AvailableCourse = () => {
     setModal(true);
     //api for enroll course
     axios
-      .post(`https://collegemanagement-x1m6.onrender.com/college/enroll`, {
+      .post(`https://backend-college-wvd6.onrender.com/college/enroll`, {
         subjectId: id,
         studentId: localStorage.getItem("student"),
       })

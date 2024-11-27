@@ -4,20 +4,26 @@ import Details from "../dashboard/Layout/Details";
 import Sidebar from "../dashboard/Layout/Sidebar";
 import Loader from "../dashboard/Layout/Loader";
 import React, { useEffect, useState } from "react";
+import { FaArrowAltCircleRight } from "react-icons/fa";
+import { FaArrowAltCircleLeft } from "react-icons/fa";
+
 function Table() {
   const [data, setData] = useState([]);
   const [modal, setModal] = useState(true);
+  const [skip, setSkip] = useState(0);
 
   useEffect(() => {
     //api to fetch all the student
     axios
-      .get(`https://collegemanagement-x1m6.onrender.com/college/viewstudent`)
+      .get(
+        `https://backend-college-wvd6.onrender.com/college/viewstudent/${skip}`
+      )
       .then((res) => {
         setData(res.data.data);
         setModal(false);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [skip]);
 
   return (
     <div className="container-fluid">
@@ -73,6 +79,64 @@ function Table() {
                             })}
                           </tbody>
                         </table>
+
+                        <div
+                          style={{
+                            width: "100%",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            marginTop: "20px",
+                          }}
+                        >
+                          {skip !== 0 && (
+                            <div style={{ marginRight: "50px" }}>
+                              <FaArrowAltCircleLeft
+                                onClick={() => {
+                                  setSkip((prevState) => prevState - 5);
+                                  setModal(true);
+                                }}
+                                style={{
+                                  marginRight: "10px",
+                                  fontSize: "20px",
+                                }}
+                              />
+                              <span
+                                style={{ marginLeft: "10px", fontSize: "17px" }}
+                              >
+                                Previous
+                              </span>
+                            </div>
+                          )}
+                          {data.length !== 0 && (
+                            <>
+                              {data.length < 5 ? (
+                                <> </>
+                              ) : (
+                                <div>
+                                  <span
+                                    style={{
+                                      marginLeft: "10px",
+                                      fontSize: "17px",
+                                    }}
+                                  >
+                                    Next
+                                  </span>
+                                  <FaArrowAltCircleRight
+                                    onClick={() => {
+                                      setSkip((prevState) => prevState + 5);
+                                      setModal(true);
+                                    }}
+                                    style={{
+                                      marginLeft: "10px",
+                                      fontSize: "20px",
+                                    }}
+                                  />
+                                </div>
+                              )}
+                            </>
+                          )}
+                        </div>
                       </>
                     )}
                   </div>

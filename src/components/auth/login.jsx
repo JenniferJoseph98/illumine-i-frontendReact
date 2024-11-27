@@ -15,13 +15,10 @@ const Login = () => {
       return;
     }
     axios
-      .post(
-        `https://collegemanagement-x1m6.onrender.com/college/student/login`,
-        {
-          email: email,
-          password: password,
-        }
-      )
+      .post(`https://backend-college-wvd6.onrender.com/college/student/login`, {
+        email: email,
+        password: password,
+      })
       .then((res) => {
         localStorage.setItem("student", res.data.student_id);
         localStorage.setItem("name", res.data.name);

@@ -13,7 +13,7 @@ const EnrolledCourse = () => {
     //fetch all the enrolled course
     axios
       .get(
-        `https://collegemanagement-x1m6.onrender.com/college/enrolledcourse/${localStorage.getItem(
+        `https://backend-college-wvd6.onrender.com/college/enrolledcourse/${localStorage.getItem(
           "student"
         )}`
       )

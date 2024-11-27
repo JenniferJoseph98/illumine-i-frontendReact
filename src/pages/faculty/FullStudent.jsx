@@ -6,12 +6,15 @@ import { MdEdit } from "react-icons/md";
 import React, { useEffect, useState } from "react";
 import EditProfile from "../dashboard/EditProfile";
 import Loader from "../dashboard/Layout/Loader";
+import { FaArrowAltCircleRight } from "react-icons/fa";
+import { FaArrowAltCircleLeft } from "react-icons/fa";
 function FullStudent() {
   const [data, setData] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modal, setModal] = useState(true);
   const [student, setStudent] = useState({});
   const [modalType, setModalType] = useState("");
+  const [skip, setSkip] = useState(0);
   const handleCloseModal = () => {
     setStudent({});
     setIsModalOpen(false);
@@ -24,7 +27,7 @@ function FullStudent() {
       //api to Create a student
       axios
         .post(
-          `https://collegemanagement-x1m6.onrender.com/college/addstudent/${localStorage.getItem(
+          `https://backend-college-wvd6.onrender.com/college/addstudent/${localStorage.getItem(
             "faculty"
           )}`,
           updatedStudent
@@ -39,7 +42,7 @@ function FullStudent() {
       //api to update student details
       axios
         .put(
-          `https://collegemanagement-x1m6.onrender.com/college/update`,
+          `https://backend-college-wvd6.onrender.com/college/update`,
           updatedStudent
         )
         .then((res) => {
@@ -67,13 +70,15 @@ function FullStudent() {
   useEffect(() => {
     //api to view all the student
     axios
-      .get(`https://collegemanagement-x1m6.onrender.com/college/viewstudent`)
+      .get(
+        `https://backend-college-wvd6.onrender.com/college/viewstudent/${skip}`
+      )
       .then((res) => {
         setData(res.data.data);
         setModal(false);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [skip]);
 
   return (
     <div className="container-fluid">
@@ -154,6 +159,63 @@ function FullStudent() {
                             })}
                           </tbody>
                         </table>
+                        <div
+                          style={{
+                            width: "100%",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            marginTop: "20px",
+                          }}
+                        >
+                          {skip !== 0 && (
+                            <div style={{ marginRight: "50px" }}>
+                              <FaArrowAltCircleLeft
+                                onClick={() => {
+                                  setSkip((prevState) => prevState - 5);
+                                  setModal(true);
+                                }}
+                                style={{
+                                  marginRight: "10px",
+                                  fontSize: "20px",
+                                }}
+                              />
+                              <span
+                                style={{ marginLeft: "10px", fontSize: "17px" }}
+                              >
+                                Previous
+                              </span>
+                            </div>
+                          )}
+                          {data.length !== 0 && (
+                            <>
+                              {data.length < 5 ? (
+                                <> </>
+                              ) : (
+                                <div>
+                                  <span
+                                    style={{
+                                      marginLeft: "10px",
+                                      fontSize: "17px",
+                                    }}
+                                  >
+                                    Next
+                                  </span>
+                                  <FaArrowAltCircleRight
+                                    onClick={() => {
+                                      setSkip((prevState) => prevState + 5);
+                                      setModal(true);
+                                    }}
+                                    style={{
+                                      marginLeft: "10px",
+                                      fontSize: "20px",
+                                    }}
+                                  />
+                                </div>
+                              )}
+                            </>
+                          )}
+                        </div>
                       </>
                     )}
                   </>

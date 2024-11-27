@@ -17,7 +17,7 @@ const StudentDashboard = () => {
     //fetch my details view my student dashboard
     axios
       .get(
-        `https://collegemanagement-x1m6.onrender.com/college/viewsinglestudent/${localStorage.getItem(
+        `https://backend-college-wvd6.onrender.com/college/viewsinglestudent/${localStorage.getItem(
           "student"
         )}`
       )
@@ -45,7 +45,7 @@ const StudentDashboard = () => {
     // api for update my details
     axios
       .put(
-        `https://collegemanagement-x1m6.onrender.com/college/update`,
+        `https://backend-college-wvd6.onrender.com/college/update`,
         updatedStudent
       )
       .then((res) => console.log(res.data))
@@ -85,7 +85,7 @@ const StudentDashboard = () => {
       //api for upload and view my profile picture
       axios
         .put(
-          `https://collegemanagement-x1m6.onrender.com/college/students/update-profile-pic/${localStorage.getItem(
+          `https://backend-college-wvd6.onrender.com/college/students/update-profile-pic/${localStorage.getItem(
             "student"
           )}`,
           formData,

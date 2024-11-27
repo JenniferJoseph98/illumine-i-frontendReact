@@ -11,7 +11,7 @@ function SubjectModal({ refresh, setRefresh }) {
   const closeModal = () => {
     //api to add subject for the faculty
     axios
-      .post(`https://collegemanagement-x1m6.onrender.com/college/addsubject`, {
+      .post(`https://backend-college-wvd6.onrender.com/college/addsubject`, {
         name: subject,
         facultyId: localStorage.getItem("faculty"),
       })
@@ -81,14 +81,15 @@ const FacultyProtectedRoutes = ({ children }) => {
   return (
     <div>
       {
-      // check the user already have subject or not, if not modal will open
-      localStorage.getItem("subject") === "true" ? (
-        <>{name.length ? children : <Navigate to="/login/faculty" />}</>
-      ) : (
-        <>
-          <SubjectModal setRefresh={setRefresh} refresh={refresh} />
-        </>
-      )}
+        // check the user already have subject or not, if not modal will open
+        localStorage.getItem("subject") === "true" ? (
+          <>{name.length ? children : <Navigate to="/login/faculty" />}</>
+        ) : (
+          <>
+            <SubjectModal setRefresh={setRefresh} refresh={refresh} />
+          </>
+        )
+      }
     </div>
   );
 };

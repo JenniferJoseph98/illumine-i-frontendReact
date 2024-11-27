@@ -20,14 +20,11 @@ const FacultyLogin = () => {
       return;
     }
     axios
-      .post(
-        `https://collegemanagement-x1m6.onrender.com/college/faculty/login`,
-        {
-          email: email,
-          password: password,
-          code: teacherCode,
-        }
-      )
+      .post(`https://backend-college-wvd6.onrender.com/college/faculty/login`, {
+        email: email,
+        password: password,
+        code: teacherCode,
+      })
       .then((res) => {
         console.log(res.data);
         localStorage.setItem("faculty", res.data.faculty_id);
