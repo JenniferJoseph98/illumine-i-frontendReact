@@ -51,6 +51,7 @@ const StudentDashboard = () => {
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
     setStudent(updatedStudent);
+    setModal(false);
     setIsModalOpen(false);
   };
   // const handleFileChange = (event) => {
@@ -99,7 +100,7 @@ const StudentDashboard = () => {
           console.log("Profile picture updated:", response.data);
           alert("Profile picture updated successfully!");
         })
-        .catch((error) => {   
+        .catch((error) => {
           console.error(
             "Error updating profile picture:",
             error.response || error
