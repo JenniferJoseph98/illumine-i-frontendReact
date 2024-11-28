@@ -22,7 +22,10 @@ function FacultyList() {
         setData(res.data.data);
         setModal(false);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setModal(false);
+
+      });
   }, [skip]);
 
   return (

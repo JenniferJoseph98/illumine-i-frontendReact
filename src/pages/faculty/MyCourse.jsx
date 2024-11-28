@@ -49,7 +49,11 @@ export default function MyCourse() {
         setStudent(details.students);
         setModal(false);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {console.log(err)
+
+        setModal(false);
+
+      });
   }
   function unEnrolledStudent() {
     setModal(true);
@@ -65,7 +69,10 @@ export default function MyCourse() {
         setStudent(details);
         setModal(false);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {console.log(err)
+        setModal(false);
+
+      });
   }
   function addStudentToMySubject(id) {
     setModal(true);
@@ -86,7 +93,10 @@ export default function MyCourse() {
         );
         setModal(false);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {console.log(err)
+        setModal(false);
+
+      });
   }
   return (
     <div className="container-fluid">

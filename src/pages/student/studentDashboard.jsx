@@ -99,7 +99,7 @@ const StudentDashboard = () => {
           console.log("Profile picture updated:", response.data);
           alert("Profile picture updated successfully!");
         })
-        .catch((error) => {
+        .catch((error) => {   
           console.error(
             "Error updating profile picture:",
             error.response || error

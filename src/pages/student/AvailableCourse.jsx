@@ -34,7 +34,11 @@ const AvailableCourse = () => {
       .then((res) => {
         setFlag(!flag);
       })
-      .catch((err) => console.log(err.response));
+      .catch((err) =>{ console.log(err.response)
+
+        setModal(false);
+
+      });
   }
   return (
     <div className="container-fluid">

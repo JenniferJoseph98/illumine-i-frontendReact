@@ -57,7 +57,10 @@ function FullStudent() {
           setIsModalOpen(false);
           setModal(false);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          console.log(err);
+          setModal(false);
+        });
     }
 
     setIsModalOpen(false);
@@ -77,7 +80,10 @@ function FullStudent() {
         setData(res.data.data);
         setModal(false);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setModal(false);
+        
+      });
   }, [skip]);
 
   return (
