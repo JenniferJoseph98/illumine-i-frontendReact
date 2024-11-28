@@ -36,7 +36,11 @@ function FullStudent() {
           setData((prevData) => [...prevData, res.data.data]);
           setModal(false);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          setModal(false);
+          console.log(err);
+          alert("Email already exist");
+        });
       setIsModalOpen(false);
     } else {
       //api to update student details
@@ -82,7 +86,6 @@ function FullStudent() {
       })
       .catch((err) => {
         setModal(false);
-        
       });
   }, [skip]);
 
