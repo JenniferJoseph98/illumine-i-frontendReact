@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Loader from "../../pages/dashboard/Layout/Loader";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const handleSubmit = (e) => {
+    setIsModalOpen(true);
+
     e.preventDefault();
 
     if (!email || !password) {
@@ -16,15 +20,22 @@ const Login = () => {
     }
     axios
       .post(`https://backend-college-wvd6.onrender.com/college/student/login`, {
-        email: email,
+        email: email.toLowerCase(),
         password: password,
       })
       .then((res) => {
+        setIsModalOpen(false);
+
         localStorage.setItem("student", res.data.student_id);
         localStorage.setItem("name", res.data.name);
         navigate("/student/dashboard");
       })
-      .catch((err) => setError(err.response.data.error));
+      .catch((err) => {
+        console.log(err);
+        setIsModalOpen(false);
+
+        setError(err.response.data.error);
+      });
   };
   useEffect(() => {
     if (localStorage.getItem("student")) {
@@ -72,6 +83,7 @@ const Login = () => {
         <p className="mt-3 text-center">
           <a href="/login/faculty">(Faculty Login)</a>
         </p>
+        {isModalOpen && <Loader />}
       </div>
     </div>
   );

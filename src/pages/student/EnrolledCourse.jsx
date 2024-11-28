@@ -34,7 +34,7 @@ const EnrolledCourse = () => {
           <Details />
           <hr />
           <div className="container mt-5">
-            <h2 className="mb-3">Enrollred Course</h2>
+            <h2 className="mb-3">Enrolled Course</h2>
 
             <div className="mb-4">
               {modal ? (

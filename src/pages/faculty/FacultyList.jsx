@@ -69,6 +69,7 @@ function FacultyList() {
                                 {data.map((d, index) => {
                                   const subjectDetails = d.subjects[0];
                                   console.log(subjectDetails);
+                                  console.log(d);
 
                                   return (
                                     <tr key={d.facultyId}>
@@ -77,10 +78,25 @@ function FacultyList() {
                                       <th scope="col">{d.email}</th>
 
                                       <th scope="col">{d.contact_number}</th>
-                                      <th scope="col">{subjectDetails.name}</th>
-                                      <th scope="col">
-                                        {subjectDetails.students.length}
-                                      </th>
+                                      {subjectDetails ? (
+                                        <>
+                                          <th scope="col">
+                                            {subjectDetails.name
+                                              ? subjectDetails.name
+                                              : "-"}
+                                          </th>
+                                          <th scope="col">
+                                            {subjectDetails.students
+                                              ? subjectDetails.students.length
+                                              : "-"}
+                                          </th>
+                                        </>
+                                      ) : (
+                                        <>
+                                          <th scope="col">-</th>
+                                          <th scope="col">-</th>
+                                        </>
+                                      )}
                                     </tr>
                                   );
                                 })}

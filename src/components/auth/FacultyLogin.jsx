@@ -1,18 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import { Modal } from "bootstrap";
+import Loader from "../../pages/dashboard/Layout/Loader";
 const FacultyLogin = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [teacherCode, setTeacherCode] = useState("");
   const [error, setError] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   useEffect(() => {
     if (localStorage.getItem("student")) navigate("/student/dashboard");
     else if (localStorage.getItem("faculty")) navigate("/faculty/studentlist");
   }, [navigate]);
   const handleSignup = (e) => {
+    setIsModalOpen(true);
+
     e.preventDefault();
 
     if (!email || !password || !teacherCode) {
@@ -21,19 +26,25 @@ const FacultyLogin = () => {
     }
     axios
       .post(`https://backend-college-wvd6.onrender.com/college/faculty/login`, {
-        email: email,
+        email: email.toLowerCase(),
         password: password,
         code: teacherCode,
       })
       .then((res) => {
         console.log(res.data);
+        setIsModalOpen(false);
+
         localStorage.setItem("faculty", res.data.faculty_id);
         localStorage.setItem("subject", res.data.subject);
         localStorage.setItem("name", res.data.name);
 
         navigate("/faculty/studentlist");
       })
-      .catch((err) => setError(err.response.data.error));
+      .catch((err) => {
+        setIsModalOpen(false);
+
+        setError(err.response.data.error);
+      });
   };
 
   return (
@@ -81,6 +92,8 @@ const FacultyLogin = () => {
         <p className="mt-3 text-center">
           <a href="/">(Student Login)</a>
         </p>
+
+        {isModalOpen && <Loader />}
       </div>
     </div>
   );
